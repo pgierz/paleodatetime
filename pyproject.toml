@@ -1,24 +1,32 @@
 [project]
 name = "paleodatetime"
-version = "0.1.0"
+dynamic = ["version"]
 description = "A datetime-like library for geological timescales supporting million-year ranges"
 authors = [{name = "Paul Gierz"}]
 requires-python = ">=3.9"
 readme = "README.md"
-license = {text = "MIT"}
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["datetime", "geology", "paleoclimate", "timescale", "xarray"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Scientific/Engineering",
 ]
 
 dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/pgierz/paleodatetime"
+Repository = "https://github.com/pgierz/paleodatetime"
+Changelog = "https://github.com/pgierz/paleodatetime/blob/master/CHANGELOG.md"
+Issues = "https://github.com/pgierz/paleodatetime/issues"
 
 [project.optional-dependencies]
 dev = [
@@ -39,11 +47,15 @@ xarray = [
 ]
 
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=77.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+# Single source of truth for the version: src/paleodatetime/__init__.py
+[tool.setuptools.dynamic]
+version = {attr = "paleodatetime.__version__"}
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -58,6 +70,8 @@ target-version = ["py39", "py310", "py311", "py312"]
 [tool.ruff]
 line-length = 100
 target-version = "py39"
+
+[tool.ruff.lint]
 select = ["E", "F", "I", "N", "W"]
 
 [tool.pixi.workspace]
