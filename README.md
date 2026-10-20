@@ -258,6 +258,22 @@ pixi run -e dev black src tests
 pixi run -e dev ruff check src tests
 ```
 
+### Releasing
+
+Releases are published to PyPI by the `Publish` workflow, which runs on `v*` tags:
+
+1. Bump `__version__` in `src/paleodatetime/__init__.py` (the only place the version lives).
+2. Move the `Unreleased` section of `CHANGELOG.md` under the new version.
+3. Commit, then tag and push:
+   ```bash
+   git tag v0.2.0
+   git push origin master v0.2.0
+   ```
+
+The workflow refuses to publish if the tag and `__version__` disagree. To exercise the
+publication path without a release, run the `Publish` workflow by hand from the Actions
+tab; that uploads to TestPyPI instead.
+
 ## License
 
 MIT License - See LICENSE file for details
